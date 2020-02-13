@@ -1,0 +1,11 @@
+.logo-header {
+    height: 250px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.margin-50 {
+    margin: 50px 0px 50px 0px;
+}

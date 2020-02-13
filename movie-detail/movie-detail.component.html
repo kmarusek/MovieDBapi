@@ -1,0 +1,9 @@
+<div class="movie-detail" *ngIf="show">
+    <p class="movie-overview">{{movie.overview}}</p>
+    <ng-container *ngFor="let genre of genreList, let i=index">
+        <p *ngIf="i<movie.genres.length">{{movie.genres[i].name}}</p>
+    </ng-container>
+    <p class="movie-runtime">Runtime: {{movie.runtime}} minutes</p>
+    <a class="thick link" [href]="movie.homepage" target="_blank">Click to See More</a>
+</div>
+<button class="orange-button" (click)="toggleMovieDetail()">{{text}}</button>

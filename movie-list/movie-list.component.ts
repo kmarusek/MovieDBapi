@@ -1,0 +1,48 @@
+import { Component, OnInit , Input} from '@angular/core';
+import { ApiService } from '../api.service';
+import { ActivatedRoute } from '@angular/router';
+
+
+@Component({
+  selector: 'movie-list',
+  templateUrl: './movie-list.component.html',
+  styleUrls: ['./movie-list.component.css']
+})
+export class MovieListComponent implements OnInit{
+  @Input() 
+  show : boolean = false;
+  showWatchList : boolean= true;
+  movie : any; 
+  movieId : number; 
+  
+  constructor(private _service: ApiService, private route: ActivatedRoute) {}
+
+
+  ngOnInit() {
+   this.getMovieStuff();
+}
+
+getMovieStuff(){
+  if( this.route.snapshot.params.genreId){
+    this._service.getMovieByGenre( this.route.snapshot.params.genreId)
+      .subscribe((data:any) => this._service.movieList = data.results);
+  } else{
+    this._service.getMovieList()
+    .subscribe((data:any) => this._service.movieList = data.results);
+  }
+}
+
+  hide(){
+    this.show=!this.show;
+    this.showWatchList=!this.showWatchList;
+  }
+
+  
+  addMovie(movie){
+    this._service.watchList.push(movie);
+    console.log(this._service.watchList);
+    return this._service.watchList
+}
+
+  }
+
